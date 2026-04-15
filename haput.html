@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Diya — with love from Ishfaq</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;overflow-x:hidden;background:#000;}
+
+/* ---- PAGES ---- */
+.page{
+  width:100vw;min-height:100vh;
+  display:none;flex-direction:column;
+  align-items:center;justify-content:flex-start;
+  position:relative;overflow:hidden;
+  padding:40px 20px 60px;
+}
+.page.active{display:flex;}
+
+/* ---- NAV ---- */
+.nav{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;z-index:100;
+}
+.nav-dot{
+  width:9px;height:9px;border-radius:50%;
+  background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4);
+  cursor:pointer;transition:all .3s;
+}
+.nav-dot.active{background:rgba(255,180,210,0.9);transform:scale(1.3);}
+
+/* ---- NAV ARROWS ---- */
+.nav-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.2);
+  border-radius:50%;width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:18px;color:rgba(255,220,240,0.7);
+  transition:all .3s;z-index:100;user-select:none;
+}
+.nav-arrow:hover{background:rgba(255,100,160,0.25);color:#fff;}
+.nav-arrow.left{left:14px;}
+.nav-arrow.right{right:14px;}
+
+/* ---- STARS ---- */
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1);}50%{opacity:1;transform:scale(1.5);}}
+
+/* ---- FLOAT PETALS ---- */
+.petal{position:absolute;font-size:16px;animation:floatUp var(--fd,9s) ease-in infinite var(--fdl,0s);opacity:0;pointer-events:none;}
+@keyframes floatUp{0%{opacity:0;transform:translateY(0) rotate(0deg);}20%{opacity:.8;}80%{opacity:.3;}100%{opacity:0;transform:translateY(-100vh) rotate(40deg);}}
+
+/* ---- PAGE 1: COVER ---- */
+#p1{background:linear-gradient(150deg,#08001a 0%,#1a003a 50%,#3a0060 100%);}
+.cover-name{font-family:'Playfair Display',serif;font-size:clamp(64px,16vw,110px);color:#ffcce0;letter-spacing:8px;text-align:center;animation:glowPulse 3s ease-in-out infinite;line-height:1;}
+@keyframes glowPulse{0%,100%{text-shadow:0 0 40px rgba(255,150,200,.5);}50%{text-shadow:0 0 80px rgba(255,180,220,1),0 0 120px rgba(255,100,180,.4);}}
+.cover-sub{font-family:'Lato',sans-serif;font-weight:300;font-size:13px;letter-spacing:6px;color:rgba(255,190,220,.5);text-transform:uppercase;margin-top:10px;text-align:center;}
+.cover-heart{font-size:80px;margin:30px 0;display:inline-block;animation:hb 1.4s ease-in-out infinite;cursor:pointer;filter:drop-shadow(0 0 20px rgba(255,80,130,.8));}
+@keyframes hb{0%,100%{transform:scale(1);}14%{transform:scale(1.2);}28%{transform:scale(1);}42%{transform:scale(1.12);}56%{transform:scale(1);}}
+.cover-tagline{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(16px,4vw,22px);color:rgba(255,210,240,.8);text-align:center;margin-top:16px;line-height:1.7;max-width:480px;}
+.cover-enter{margin-top:32px;background:rgba(255,90,150,.12);border:0.5px solid rgba(255,140,190,.4);border-radius:50px;padding:14px 40px;color:#ffcce0;font-family:'Lato',sans-serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;font-weight:300;cursor:pointer;transition:all .3s;}
+.cover-enter:hover{background:rgba(255,90,150,.3);transform:scale(1.05);}
+
+/* ---- PAGE 2: WHY I LOVE YOU ---- */
+#p2{background:linear-gradient(140deg,#0d001f 0%,#200040 60%,#3d005a 100%);}
+.page-heading{font-family:'Playfair Display',serif;font-size:clamp(28px,7vw,48px);color:#ffcce0;text-align:center;margin-bottom:8px;letter-spacing:2px;}
+.page-sub{font-family:'Lato',sans-serif;font-weight:300;font-size:12px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,180,220,.45);text-align:center;margin-bottom:32px;}
+.reasons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;width:100%;max-width:620px;}
+.reason-card{background:rgba(255,100,160,.08);border:0.5px solid rgba(255,140,190,.2);border-radius:18px;padding:20px 16px;text-align:center;transition:all .3s;cursor:default;animation:fadeInUp .6s ease both;}
+.reason-card:hover{background:rgba(255,100,160,.18);border-color:rgba(255,160,210,.45);transform:translateY(-4px);}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.reason-card:nth-child(1){animation-delay:.1s;} .reason-card:nth-child(2){animation-delay:.2s;}
+.reason-card:nth-child(3){animation-delay:.3s;} .reason-card:nth-child(4){animation-delay:.4s;}
+.reason-card:nth-child(5){animation-delay:.5s;} .reason-card:nth-child(6){animation-delay:.6s;}
+.reason-card:nth-child(7){animation-delay:.7s;} .reason-card:nth-child(8){animation-delay:.8s;}
+.r-icon{font-size:26px;display:block;margin-bottom:10px;}
+.r-title{font-family:'Playfair Display',serif;font-size:14px;color:#ffcce0;margin-bottom:6px;}
+.r-text{font-family:'Lato',sans-serif;font-size:12px;color:rgba(255,200,230,.7);line-height:1.6;font-weight:300;}
+
+/* ---- PAGE 3: LETTER ---- */
+#p3{background:linear-gradient(155deg,#0a0020 0%,#180035 55%,#2e0050 100%);}
+.letter-wrap{max-width:600px;width:100%;}
+.letter-card{background:rgba(255,255,255,.04);border:0.5px solid rgba(255,180,210,.2);border-radius:22px;padding:36px 30px;margin-bottom:24px;position:relative;overflow:hidden;}
+.letter-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,160,200,.5),transparent);}
+.qmark{font-family:'Playfair Display',serif;font-size:60px;color:rgba(255,150,200,.25);line-height:.5;display:block;margin-bottom:8px;}
+.letter-p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(16px,4vw,19px);color:rgba(255,228,243,.93);line-height:1.9;text-align:center;}
+.letter-p span{color:#ffb3d4;font-style:normal;}
+
+/* ---- PAGE 4: MEMORIES / PROMISES ---- */
+#p4{background:linear-gradient(145deg,#06001a 0%,#15002e 50%,#280048 100%);}
+.timeline{max-width:560px;width:100%;position:relative;padding-left:24px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,130,180,.2);}
+.t-item{position:relative;margin-bottom:28px;animation:fadeInUp .6s ease both;}
+.t-item:nth-child(1){animation-delay:.1s;} .t-item:nth-child(2){animation-delay:.25s;}
+.t-item:nth-child(3){animation-delay:.4s;} .t-item:nth-child(4){animation-delay:.55s;}
+.t-item:nth-child(5){animation-delay:.7s;}
+.t-dot{position:absolute;left:-28px;top:6px;width:10px;height:10px;border-radius:50%;background:rgba(255,100,170,.7);box-shadow:0 0 10px rgba(255,80,160,.5);}
+.t-title{font-family:'Playfair Display',serif;font-size:16px;color:#ffcce0;margin-bottom:6px;}
+.t-text{font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,200,230,.75);line-height:1.75;font-weight:300;}
+
+/* ---- PAGE 5: CONSTELLATION / STARS INTERACTIVE ---- */
+#p5{background:radial-gradient(ellipse at 50% 30%,#1a0030 0%,#08001a 70%);}
+.sky-msg{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(16px,4vw,21px);color:rgba(255,220,242,.85);text-align:center;max-width:500px;line-height:1.9;margin-bottom:28px;}
+#constellation{width:100%;max-width:580px;height:280px;position:relative;border:0.5px solid rgba(255,150,200,.15);border-radius:20px;background:rgba(0,0,0,.3);cursor:crosshair;overflow:hidden;}
+.c-hint{font-family:'Lato',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,170,210,.35);text-align:center;margin-top:12px;}
+.c-star{position:absolute;border-radius:50%;background:#fff;pointer-events:none;transition:transform .2s;}
+.c-line{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.c-label{position:absolute;font-family:'Lato',sans-serif;font-size:10px;color:rgba(255,200,230,.6);pointer-events:none;transform:translate(-50%,-18px);}
+
+/* ---- PAGE 6: FINAL / SIGN-OFF ---- */
+#p6{background:linear-gradient(150deg,#05001a 0%,#120028 50%,#240042 100%);}
+.final-wrap{display:flex;flex-direction:column;align-items:center;gap:0;max-width:580px;width:100%;}
+.final-big{font-family:'Playfair Display',serif;font-size:clamp(32px,8vw,58px);color:#ffcce0;text-align:center;text-shadow:0 0 40px rgba(255,130,190,.5);line-height:1.2;margin-bottom:14px;}
+.final-poem{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(15px,3.5vw,18px);color:rgba(255,215,240,.85);text-align:center;line-height:2;margin-bottom:28px;max-width:460px;}
+.signature-block{background:rgba(255,80,140,.07);border:0.5px solid rgba(255,140,190,.25);border-radius:20px;padding:28px 32px;text-align:center;width:100%;margin-bottom:20px;}
+.sig-love{font-family:'Lato',sans-serif;font-weight:300;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:rgba(255,180,220,.5);margin-bottom:14px;}
+.sig-name{font-family:'Playfair Display',serif;font-size:clamp(26px,7vw,44px);color:#ffb3d4;letter-spacing:3px;text-shadow:0 0 30px rgba(255,120,180,.5);}
+.sig-from{font-family:'Lato',sans-serif;font-weight:300;font-size:12px;letter-spacing:4px;color:rgba(255,180,220,.4);margin-top:8px;text-transform:uppercase;}
+.fireworks-btn{background:rgba(255,90,150,.13);border:0.5px solid rgba(255,140,190,.4);border-radius:50px;padding:14px 36px;color:#ffcce0;font-family:'Lato',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:300;cursor:pointer;transition:all .3s;margin-top:10px;}
+.fireworks-btn:hover{background:rgba(255,90,150,.3);transform:scale(1.04);}
+.sparkrow{display:flex;gap:16px;justify-content:center;margin:18px 0;font-size:20px;animation:sparkPulse 2s ease-in-out infinite;}
+@keyframes sparkPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* ---- FIREWORK PARTICLES ---- */
+.fw-p{position:fixed;border-radius:50%;pointer-events:none;opacity:0;z-index:9999;}
+.fw-p.pop{animation:fwAnim .9s ease-out forwards;}
+@keyframes fwAnim{0%{opacity:1;transform:scale(.4);}50%{opacity:.9;transform:translate(var(--fx),var(--fy)) scale(1.6);}100%{opacity:0;transform:translate(calc(var(--fx)*2),calc(var(--fy)*2)) scale(.3);}}
+
+/* ---- PAGE TRANSITION ---- */
+.page{animation:none;}
+.page.slide-in{animation:slideIn .5s ease both;}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+</style>
+</head>
+<body>
+
+<!-- ========== PAGE 1: COVER ========== -->
+<div class="page active" id="p1">
+  <div class="star" style="width:2px;height:2px;top:8%;left:12%;--d:2.5s;--dl:.3s;"></div>
+  <div class="star" style="width:1.5px;height:1.5px;top:15%;left:75%;--d:3.5s;--dl:1s;"></div>
+  <div class="star" style="width:3px;height:3px;top:25%;left:40%;--d:2s;--dl:.7s;"></div>
+  <div class="star" style="width:1px;height:1px;top:60%;left:20%;--d:4s;--dl:.2s;"></div>
+  <div class="star" style="width:2.5px;height:2.5px;top:70%;left:85%;--d:3s;--dl:1.5s;"></div>
+  <div class="star" style="width:1.5px;height:1.5px;top:40%;left:92%;--d:2.8s;--dl:.5s;"></div>
+  <div class="star" style="width:2px;height:2px;top:80%;left:55%;--d:3.2s;--dl:.9s;"></div>
+  <div class="star" style="width:1px;height:1px;top:5%;left:55%;--d:4.5s;--dl:2s;"></div>
+  <div class="star" style="width:2px;height:2px;top:50%;left:8%;--d:2.2s;--dl:1.2s;"></div>
+
+  <div class="petal" style="left:10%;bottom:-10px;--fd:8s;--fdl:0s;">🌸</div>
+  <div class="petal" style="left:30%;bottom:-10px;--fd:10s;--fdl:2s;">💕</div>
+  <div class="petal" style="left:60%;bottom:-10px;--fd:7s;--fdl:1s;">✨</div>
+  <div class="petal" style="left:80%;bottom:-10px;--fd:11s;--fdl:3s;">🌸</div>
+  <div class="petal" style="left:50%;bottom:-10px;--fd:9s;--fdl:.5s;">💖</div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;width:100%;max-width:600px;">
+    <div class="cover-name">Diya</div>
+    <div class="cover-sub">a love letter in six chapters</div>
+    <div class="cover-heart" onclick="burstHeart(event)">❤️</div>
+    <div class="cover-tagline">
+      Some people enter your life like a quiet miracle —<br>
+      you are that miracle, every single day.
+    </div>
+    <button class="cover-enter" onclick="goTo(2)">open your letter →</button>
+  </div>
+
+  <div class="nav">
+    <div class="nav-dot active" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+    <div class="nav-dot" onclick="goTo(4)"></div>
+    <div class="nav-dot" onclick="goTo(5)"></div>
+    <div class="nav-dot" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-arrow right" onclick="goTo(2)">›</div>
+</div>
+
+<!-- ========== PAGE 2: WHY I LOVE YOU ========== -->
+<div class="page" id="p2">
+  <div class="star" style="width:2px;height:2px;top:5%;left:20%;--d:3s;--dl:.4s;"></div>
+  <div class="star" style="width:1px;height:1px;top:12%;left:80%;--d:2.5s;--dl:1s;"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:640px;flex:1;">
+    <div class="page-heading" style="margin-top:10px;">why I love you</div>
+    <div class="page-sub">every reason, every day</div>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <span class="r-icon">🌙</span>
+        <div class="r-title">You stay</div>
+        <div class="r-text">In my darkest nights, you never left. That means everything.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">🫂</span>
+        <div class="r-title">Your warmth</div>
+        <div class="r-text">Being near you feels like being home — safe, soft, real.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">👂</span>
+        <div class="r-title">You listen</div>
+        <div class="r-text">You hear what I say and what I can't say. No judgment. Just love.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">✨</span>
+        <div class="r-title">Your smile</div>
+        <div class="r-text">It fixes everything. One smile from you and the world gets lighter.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">🔥</span>
+        <div class="r-title">You believe</div>
+        <div class="r-text">You believe in me even when I've completely stopped believing in myself.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">🌸</span>
+        <div class="r-title">Your heart</div>
+        <div class="r-text">You love so deeply, so gently. I've never known a heart like yours.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">💬</span>
+        <div class="r-title">Your voice</div>
+        <div class="r-text">Hearing your voice is enough to turn a bad day into a good one.</div>
+      </div>
+      <div class="reason-card">
+        <span class="r-icon">🌺</span>
+        <div class="r-title">You are rare</div>
+        <div class="r-text">There is no one in this world quite like you. You are one of a kind.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot active" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+    <div class="nav-dot" onclick="goTo(4)"></div>
+    <div class="nav-dot" onclick="goTo(5)"></div>
+    <div class="nav-dot" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-arrow left" onclick="goTo(1)">‹</div>
+  <div class="nav-arrow right" onclick="goTo(3)">›</div>
+</div>
+
+<!-- ========== PAGE 3: LOVE LETTER ========== -->
+<div class="page" id="p3">
+  <div class="star" style="width:2.5px;height:2.5px;top:6%;left:15%;--d:3s;--dl:.2s;"></div>
+  <div class="star" style="width:1px;height:1px;top:20%;left:88%;--d:4s;--dl:1s;"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:600px;flex:1;margin-top:10px;">
+    <div class="page-heading">a letter for you</div>
+    <div class="page-sub">from my heart to yours</div>
+    <div class="letter-wrap">
+      <div class="letter-card">
+        <span class="qmark">"</span>
+        <p class="letter-p">
+          Diya, you are the best thing that has ever walked into my life.<br><br>
+          Not because everything is perfect — but because with you, even the imperfect feels worth it.
+          You have this way of making me feel like I matter, like I am <span>enough</span>,
+          even on the days I feel like nothing at all.
+        </p>
+      </div>
+      <div class="letter-card">
+        <span class="qmark">"</span>
+        <p class="letter-p">
+          I know you're carrying a lot right now. I see it, even when you try to hide it behind that smile.<br><br>
+          You don't have to be strong all the time. Not with me.<br>
+          I am here — fully, completely, without any condition.<br><br>
+          <span>You are not alone. Not today. Not ever.</span>
+        </p>
+      </div>
+      <div class="letter-card">
+        <span class="qmark">"</span>
+        <p class="letter-p">
+          Thank you for being my anchor when my world was shaking.<br>
+          Thank you for your patience, your softness, your love.<br><br>
+          I would choose you <span>every single time</span> — in every life, in every universe,
+          in every version of this story.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot active" onclick="goTo(3)"></div>
+    <div class="nav-dot" onclick="goTo(4)"></div>
+    <div class="nav-dot" onclick="goTo(5)"></div>
+    <div class="nav-dot" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-arrow left" onclick="goTo(2)">‹</div>
+  <div class="nav-arrow right" onclick="goTo(4)">›</div>
+</div>
+
+<!-- ========== PAGE 4: PROMISES ========== -->
+<div class="page" id="p4">
+  <div class="star" style="width:2px;height:2px;top:8%;left:70%;--d:2.8s;--dl:.6s;"></div>
+  <div class="star" style="width:1.5px;height:1.5px;top:25%;left:10%;--d:3.5s;--dl:.3s;"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:580px;flex:1;margin-top:10px;">
+    <div class="page-heading">my promises to you</div>
+    <div class="page-sub">words I will keep forever</div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-title">I will always show up</div>
+        <div class="t-text">No matter what time it is, no matter where I am — when you need me, I will be there. That is not a maybe. That is a promise.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-title">I will celebrate every part of you</div>
+        <div class="t-text">Your smallest wins, your big dreams, your silly moments, your quiet strengths — I will cheer for every single one.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-title">I will remind you of your worth</div>
+        <div class="t-text">On every day you forget how beautiful and incredible you are, I will be the one reminding you — patiently, lovingly, endlessly.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-title">I will love you through the hard times</div>
+        <div class="t-text">Love isn't just for the easy days. I choose to love you through the storms, the silences, the struggles — especially those.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-title">I will never stop choosing you</div>
+        <div class="t-text">Every morning I wake up, I choose you. Not because I have to — but because you are the best choice I have ever made.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+    <div class="nav-dot active" onclick="goTo(4)"></div>
+    <div class="nav-dot" onclick="goTo(5)"></div>
+    <div class="nav-dot" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-arrow left" onclick="goTo(3)">‹</div>
+  <div class="nav-arrow right" onclick="goTo(5)">›</div>
+</div>
+
+<!-- ========== PAGE 5: OUR CONSTELLATION ========== -->
+<div class="page" id="p5">
+  <div class="star" style="width:2px;height:2px;top:5%;left:30%;--d:3s;--dl:.4s;"></div>
+  <div class="star" style="width:1.5px;height:1.5px;top:18%;left:75%;--d:2.5s;--dl:1s;"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:600px;flex:1;margin-top:10px;">
+    <div class="page-heading">our constellation</div>
+    <div class="page-sub">tap the sky to add a star</div>
+    <p class="sky-msg">
+      Every star in the sky has a story. But my favourite story is ours —
+      written in light, held together by love, stretching on forever.
+    </p>
+    <div id="constellation" onclick="addStar(event)">
+      <svg class="c-line" id="cLines"></svg>
+    </div>
+    <div class="c-hint">click anywhere in the sky above to add stars • your constellation</div>
+  </div>
+
+  <div class="nav">
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+    <div class="nav-dot" onclick="goTo(4)"></div>
+    <div class="nav-dot active" onclick="goTo(5)"></div>
+    <div class="nav-dot" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-arrow left" onclick="goTo(4)">‹</div>
+  <div class="nav-arrow right" onclick="goTo(6)">›</div>
+</div>
+
+<!-- ========== PAGE 6: SIGN-OFF ========== -->
+<div class="page" id="p6">
+  <div class="star" style="width:2px;height:2px;top:6%;left:18%;--d:3s;--dl:.5s;"></div>
+  <div class="star" style="width:1.5px;height:1.5px;top:15%;left:78%;--d:2.8s;--dl:1.2s;"></div>
+  <div class="star" style="width:3px;height:3px;top:30%;left:50%;--d:2s;--dl:.8s;"></div>
+
+  <div class="petal" style="left:15%;bottom:-10px;--fd:9s;--fdl:0s;">🌸</div>
+  <div class="petal" style="left:45%;bottom:-10px;--fd:11s;--fdl:1.5s;">💕</div>
+  <div class="petal" style="left:75%;bottom:-10px;--fd:8s;--fdl:.8s;">✨</div>
+  <div class="petal" style="left:90%;bottom:-10px;--fd:10s;--fdl:2.5s;">💖</div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;max-width:580px;flex:1;margin-top:20px;">
+    <div class="final-wrap">
+      <div class="sparkrow">✨ 🌸 💕 🌸 ✨</div>
+      <div class="final-big">I love you, Diya.</div>
+      <div class="final-poem">
+        Not just on the easy days —<br>
+        on every single one.<br>
+        On the quiet days, the hard days,<br>
+        the days you feel invisible —<br>
+        I see you. I love you. I choose you.
+      </div>
+
+      <div class="signature-block">
+        <div class="sig-love">with all my love, always &amp; forever</div>
+        <div class="sig-name">Ishfaq Haput</div>
+        <div class="sig-from">Haput, Kashmir — yours completely ♾</div>
+      </div>
+
+      <button class="fireworks-btn" onclick="launchFireworks()">celebrate our love 🎆</button>
+    </div>
+  </div>
+
+  <div class="nav">
+    <div class="nav-dot" onclick="goTo(1)"></div>
+    <div class="nav-dot" onclick="goTo(2)"></div>
+    <div class="nav-dot" onclick="goTo(3)"></div>
+    <div class="nav-dot" onclick="goTo(4)"></div>
+    <div class="nav-dot" onclick="goTo(5)"></div>
+    <div class="nav-dot active" onclick="goTo(6)"></div>
+  </div>
+  <div class="nav-arrow left" onclick="goTo(5)">‹</div>
+</div>
+
+<script>
+var currentPage = 1;
+var totalPages = 6;
+
+function goTo(n) {
+  var old = document.getElementById('p' + currentPage);
+  var next = document.getElementById('p' + n);
+  if (!next || n === currentPage) return;
+  old.classList.remove('active');
+  next.classList.add('active');
+  next.classList.remove('slide-in');
+  void next.offsetWidth;
+  next.classList.add('slide-in');
+  currentPage = n;
+  document.querySelectorAll('.nav-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === n - 1);
+  });
+}
+
+function burstHeart(e) {
+  spawnFireworks(e.clientX, e.clientY, 12);
+}
+
+function spawnFireworks(cx, cy, count) {
+  var colors = ['#ff6b9d','#ffb3d4','#ff8cc8','#ffd6ec','#ffaad4','#ff4d88','#ffc2de'];
+  count = count || 20;
+  for (var i = 0; i < count; i++) {
+    (function(i) {
+      setTimeout(function() {
+        var fw = document.createElement('div');
+        fw.className = 'fw-p';
+        var size = 4 + Math.random() * 5;
+        var angle = (i / count) * 360 * (Math.random() * 0.4 + 0.8);
+        var dist = 50 + Math.random() * 90;
+        var rad = angle * Math.PI / 180;
+        var fx = Math.cos(rad) * dist;
+        var fy = Math.sin(rad) * dist;
+        fw.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + cx + 'px;top:' + cy + 'px;background:' + colors[i % colors.length] + ';--fx:' + fx + 'px;--fy:' + fy + 'px;';
+        document.body.appendChild(fw);
+        void fw.offsetWidth;
+        fw.classList.add('pop');
+        setTimeout(function() { fw.remove(); }, 1000);
+      }, i * 30);
+    })(i);
+  }
+}
+
+function launchFireworks() {
+  for (var i = 0; i < 8; i++) {
+    (function(i) {
+      setTimeout(function() {
+        spawnFireworks(
+          120 + Math.random() * (window.innerWidth - 240),
+          80 + Math.random() * (window.innerHeight * 0.6),
+          18
+        );
+      }, i * 300);
+    })(i);
+  }
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' && currentPage < totalPages) goTo(currentPage + 1);
+  if (e.key === 'ArrowLeft' && currentPage > 1) goTo(currentPage - 1);
+});
+
+// Touch swipe
+var touchStartX = 0;
+document.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', function(e) {
+  var dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) {
+    if (dx < 0 && currentPage < totalPages) goTo(currentPage + 1);
+    if (dx > 0 && currentPage > 1) goTo(currentPage - 1);
+  }
+});
+
+// Constellation
+var cStars = [];
+var cNames = ['Diya','Ishfaq','love','hope','us','forever','home','light','heart','dream'];
+var cNameIdx = 0;
+
+function addStar(e) {
+  var box = document.getElementById('constellation');
+  var rect = box.getBoundingClientRect();
+  var x = e.clientX - rect.left;
+  var y = e.clientY - rect.top;
+
+  var s = document.createElement('div');
+  s.className = 'c-star';
+  var size = 4 + Math.random() * 5;
+  s.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (x - size/2) + 'px;top:' + (y - size/2) + 'px;box-shadow:0 0 ' + (size*3) + 'px rgba(255,200,230,0.9);';
+  box.appendChild(s);
+
+  if (cNames[cNameIdx]) {
+    var lbl = document.createElement('div');
+    lbl.className = 'c-label';
+    lbl.textContent = cNames[cNameIdx];
+    lbl.style.left = x + 'px';
+    lbl.style.top = y + 'px';
+    box.appendChild(lbl);
+    cNameIdx = (cNameIdx + 1) % cNames.length;
+  }
+
+  cStars.push({x: x, y: y});
+
+  if (cStars.length > 1) {
+    var svg = document.getElementById('cLines');
+    var prev = cStars[cStars.length - 2];
+    var line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1', prev.x);
+    line.setAttribute('y1', prev.y);
+    line.setAttribute('x2', x);
+    line.setAttribute('y2', y);
+    line.setAttribute('stroke','rgba(255,180,220,0.3)');
+    line.setAttribute('stroke-width','1');
+    line.setAttribute('stroke-dasharray','4,4');
+    svg.appendChild(line);
+  }
+}
+
+// Seed some stars on page 5
+window.addEventListener('load', function() {
+  var box = document.getElementById('constellation');
+  var seeds = [{x:80,y:60},{x:200,y:40},{x:320,y:80},{x:430,y:50},{x:500,y:100},{x:160,y:150},{x:280,y:180},{x:400,y:160}];
+  seeds.forEach(function(pt) {
+    var s = document.createElement('div');
+    s.className = 'c-star';
+    var size = 2 + Math.random() * 2;
+    s.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + pt.x + 'px;top:' + pt.y + 'px;opacity:.5;box-shadow:0 0 4px rgba(255,220,240,.6);';
+    box.appendChild(s);
+  });
+});
+</script>
+</body>
+</html>
